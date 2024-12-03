@@ -1,0 +1,172 @@
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Create the ScreenGui
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "DoorsItemsGUI"
+ScreenGui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create the main frame
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 200, 0, 480)  -- Adjusted height to accommodate all buttons
+Frame.Position = UDim2.new(0.5, -100, 0.1, 0)
+Frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+Frame.BorderSizePixel = 0
+Frame.Active = true
+Frame.Draggable = true
+Frame.Parent = ScreenGui
+
+-- Create the title bar
+local TitleBar = Instance.new("TextLabel")
+TitleBar.Size = UDim2.new(1, 0, 0, 30)
+TitleBar.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+TitleBar.TextColor3 = Color3.new(1, 1, 1)
+TitleBar.Text = "Doors Items Spawner"
+TitleBar.Parent = Frame
+
+-- Function to create buttons
+local function createButton(name, position, callback)
+    local Button = Instance.new("TextButton")
+    Button.Size = UDim2.new(0.8, 0, 0, 30)
+    Button.Position = position
+    Button.BackgroundColor3 = Color3.new(0, 0, 0) -- Set button background color to black
+    Button.Text = name
+    Button.TextColor3 = Color3.new(1, 1, 1) -- Set text color to white for contrast
+    Button.Parent = Frame
+    Button.MouseButton1Click:Connect(callback)
+end
+
+-- Function to create a shakelight
+local function createShakelight(colorName, colorValue, brightness)
+    local Tool = Instance.new("Tool")
+    Tool.Name = colorName .. " Shake Light"
+    
+    local Handle = Instance.new("Part")
+    Handle.Name = "Handle"
+    Handle.Size = Vector3.new(1, 2, 1)
+    Handle.Color = colorValue
+    Handle.Material = Enum.Material.Metal
+    Handle.CanCollide = false -- Prevents collisions
+    Handle.Anchored = false -- Make sure it's not anchored so it can be used as a tool
+    
+    Handle.Parent = Tool
+    
+    local PointLight = Instance.new("PointLight")
+    PointLight.Parent = Handle
+    PointLight.Brightness = brightness
+    PointLight.Range = 20
+    PointLight.Color = colorValue
+    
+    Tool.Parent = LocalPlayer.Backpack -- Parent the tool to the player's backpack for it to be usable
+    
+    return Tool
+end
+
+-- Create buttons for shakelights and other items
+createButton("Spawn Gold Shakelight", UDim2.new(0.1, 0, 0.15, 0), function()
+    createShakelight("Gold", Color3.new(1, 0.8, 0), 1.5) -- Gold shake light with brightness of 1.5
+end)
+
+createButton("Spawn Green Shakelight", UDim2.new(0.1, 0, 0.25, 0), function()
+    createShakelight("Green", Color3.new(0, 0.8, 0), 0.5) -- Green shake light with brightness of 0.5
+end)
+
+createButton("Spawn Crucifix", UDim2.new(0.1, 0, 0.35, 0), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Johnny39871/assets/main/crucifixo"))()
+end)
+
+createButton("Spawn Urine Jar", UDim2.new(0.1, 0, 0.45, 0), function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/notpoiu/Scripts/refs/heads/main/StarJug.lua"))()
+end)
+
+createButton("Spawn Water Jar", UDim2.new(0.1, 0, 0.55, 0), function()
+    loadstring(game:HttpGet('https://gist.githubusercontent.com/IdkMyNameLoll/04d7dd5e02688624b958b8c2604b924c/raw/9e86b34249f44ed2dd433176e67daaf3db30cde8/MoonBottle'))()
+end)
+
+createButton("Spawn Rocket Launcher", UDim2.new(0.1 , .5 , .65 ,00) , function()
+     loadstring(game:HttpGet('https://raw.githubusercontent.com/notpoiu/Scripts/main/rocketLauncher.lua'))() 
+end)
+
+createButton("Spawn Black Hole", UDim2.new(.1 , .5 , .75 , .00) , function()
+     loadstring(game:HttpGet('https://raw.githubusercontent.com/iimateiYT/Scripts/main/Black%20Hole.lua'))() 
+end)
+
+createButton("Spawn Skeleton Key", UDim2.new(.1 , .5 , .85 , .00) , function()
+     local ToolKey = Instance.new("Tool")
+     ToolKey.Name ="Skeleton Key"
+     ToolKey.RequiresHandle=true
+
+     local HandleKey= Instance.new("Part")
+     HandleKey.Name="Handle"
+     HandleKey.Size=Vector3.new(1,.5,.5)
+     HandleKey.Color=Color3.fromRGB(255 ,215 ,0) -- Gold color for skeleton key
+     HandleKey.Material=Enum.Material.Metal
+     HandleKey.CanCollide=false 
+     HandleKey.Anchored=false 
+     HandleKey.Parent=ToolKey 
+
+     ToolKey.Parent=LocalPlayer.Backpack -- Parent the tool to the player's backpack for it to be usable 
+
+      return ToolKey 
+end)
+
+createButton("Spawn Lockpick", UDim2.new(.1 , .5 , .95 , .00) , function()
+     local ToolLockpick= Instance.new("Tool")
+     ToolLockpick.Name ="Lockpick"
+     ToolLockpick.RequiresHandle=true
+
+     local HandleLockpick= Instance.new("Part")
+     HandleLockpick.Name="Handle"
+     HandleLockpick.Size=Vector3.new(.5,.5,.5)
+     HandleLockpick.Color=Color3.fromRGB(255 ,255 ,255) -- White color for lockpick
+     HandleLockpick.Material=Enum.Material.Metal
+     HandleLockpick.CanCollide=false 
+     HandleLockpick.Anchored=false 
+     HandleLockpick.Parent=ToolLockpick 
+
+     ToolLockpick.Parent=LocalPlayer.Backpack -- Parent the tool to the player's backpack for it to be usable 
+
+      return ToolLockpick 
+end)
+
+createButton("Spawn Seek Gun", UDim2.new(.1 , .5 , .05 , .00) , function()
+     loadstring(game:HttpGet('https://raw.githubusercontent.com/notpoiu/Scripts/main/seekgun.lua'))() 
+end)
+
+-- Toggle GUI visibility with F4 key
+local function toggleGui()
+    ScreenGui.Enabled = not ScreenGui.Enabled
+end
+
+UserInputService.InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.F4 then
+        toggleGui()
+    end
+end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- Press F4 To Activate GUI -
